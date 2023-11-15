@@ -50,6 +50,7 @@ export default defineConfig({
   build: {
     sourcemap: process.env.SOURCE_MAP === "true",
     outDir: "build",
+    manifest: true,
   },
   server: {
     port: 3000,
