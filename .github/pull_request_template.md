@@ -1,20 +1,20 @@
 ## Background (Required)
 
-/\*_ Put a description of the Pull Request and Why You Opened It _/
+/\*_ Updated vite.config.ts, and added claims-sw.ts and prompt-sw.ts _/
 
 ## Changes (Required)
 
-/\*_ Include a description of the changes that were made at a high level and what they are intended to solve _/
+/\*_ The vite.config.ts file did not have the complete manifest from the React example. The claims-sw.ts and prompt-sw.ts needed to be added under src/. This was acuired from the examples/react-router package directory. There was an issue with the event, eventlistener, and the ServiceWorkerGlobalScope. /// <reference lib="webworker" /> needed to be added to both service worker files._/
 
 ## Rollback (Required)
 
-/** In case we encounted an issue with this PR in the future and we need to revert back.... \*/
-/** What do you we need to know before doing that so we don't make things worse \*/
+/** In case issues arise with this branch rollback to previous version. \*/
+/** The previous version did not have the files listed above, and it had an incomplete manifest.webmanifest. This will have to be competed to move forward with project completion. \*/
 
 ## TODO (Optional)
 
-[ ] TODO List of things that still need to be accomplished before review, merging, etc
+[ ] TODO: Nothing to do before review and merging. All of Task 2 complete.
 
 ### Notes (Optional)
 
-/\*_ Helpful notes for the future _/
+/\*_ Consult Stack Overflow before spending 2 hours trying to find out why the service worker isn't working correctly_/
