@@ -8,11 +8,12 @@ import replace from "@rollup/plugin-replace";
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: "development",
   base: "/",
-  includeAssets: ["favicon.svg"],
+  // includeAssets: ["favicon.svg"],
   manifest: {
     name: "notes pwa",
     short_name: "npwa",
     theme_color: "#ffffff",
+    start_url: "/index.html",
   },
   devOptions: {
     enabled: process.env.SW_DEV === "true",
