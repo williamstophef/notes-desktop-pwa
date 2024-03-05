@@ -10,12 +10,10 @@ function NotesLayout() {
   return (
     <Layout>
       <Sidebar />
-      <Layout>
-        <Layout.Content>
-          <Navbar />
-          <Outlet />
-        </Layout.Content>
-      </Layout>
+      <Layout.Content className="w-100">
+        <Navbar />
+        <Outlet />
+      </Layout.Content>
     </Layout>
   );
 }

@@ -1,74 +1,83 @@
-import React, { useState } from "react";
+import React from "react";
 
-/** Vendorts */
+/** Vendors */
 import { CiCirclePlus } from "react-icons/ci";
-import type { TabsProps } from "antd";
-import { Button, Col, Row, Tabs } from "antd";
+import { Button, Flex, Tabs } from "antd";
 
-const items: TabsProps["items"] = [
-  {
-    key: "1",
-    label: "All",
-    children: <div>1</div>,
-  },
-  {
-    key: "2",
-    label: "Projects",
-    children: <div>2</div>,
-  },
-  {
-    key: "3",
-    label: "Business",
-    children: <div>3</div>,
-  },
-  {
-    key: "4",
-    label: "Professional",
-    children: <div>4</div>,
-  },
-];
+/** Custom Hooks */
+import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
+
+/** Types */
+import type { IRootState } from "@redux/configureStore";
+import type { TabsProps } from "antd";
 
 function Home() {
-  const [notes, setNotes] = useState([
-    { title: "Note 1", html: "Content for Note 1" },
-  ]);
+  const dispatch = useAppDispatch();
 
-  const addNewNote = () => {
-    const newNote = { title: "New Note", html: "Content for the new note" };
-    setNotes([...notes, newNote]);
+  /** Step 1. Get Redux State */
+  const { notes } = useAppSelector((state: IRootState) => ({
+    notes: state.note.list,
+  }));
+
+  const actions = {
+    create: () => {
+      const note: INote = {
+        resource_id: "note",
+        resource_name: `note-${new Date().getTime()}`,
+        text: "Content for the new note",
+        title: "New Note",
+      };
+      dispatch(createNoteAction(note));
+    },
   };
 
+  const items: TabsProps["items"] = [
+    {
+      key: "home-note-tab-0",
+      label: "All",
+      children: (
+        <div>
+          {notes.map((note: INote) => (
+            <div>{note.title}</div>
+          ))}
+        </div>
+      ),
+    },
+    {
+      key: "home-note-tab-1",
+      label: "Projects",
+      children: <div>2</div>,
+    },
+    {
+      key: "home-note-tab-2",
+      label: "Business",
+      children: <div>3</div>,
+    },
+    {
+      key: "home-note-tab-3",
+      label: "Professional",
+      children: <div>4</div>,
+    },
+  ];
+
   return (
-    <React.Fragment>
-      <Row
-        align="middle"
-        gutter={12}
-        style={{
-          marginBottom: "25px",
-          marginTop: "25px",
-          marginLeft: "75px",
-        }}
-      >
-        <Col>
-          <Tabs defaultActiveKey="1" items={items} />
-        </Col>
-        <Col>
+    <Flex className="p-3">
+      <Tabs
+        className="w-100"
+        defaultActiveKey="home-note-tab-0"
+        items={items}
+        tabBarExtraContent={
           <Button
             icon={<CiCirclePlus />}
+            onClick={actions.create}
             size="large"
-            style={{
-              textAlign: "center",
-              left: "910px",
-              color: "#3333ff",
-            }}
             type="text"
-            onClick={addNewNote}
           >
-            Add new note
+            Add Note
           </Button>
-        </Col>
-      </Row>
-    </React.Fragment>
+        }
+      />
+    </Flex>
   );
 }
 

@@ -1,16 +1,17 @@
-/** Vendors */
 import React, { useState } from "react";
+
+/** Vendors */
 import { Col, Row } from "antd";
 
 /** Custom Hooks */
-import useStorage from "../../../hooks/useStorage";
+import useStorage from "@hooks/useStorage";
 
 /** Custom Components */
 import Note from "./Note";
 import NoteModal from "../../shared/modal/Note";
 
 /** Types */
-import type { INote } from "../../../types";
+import type { INote } from "types";
 
 function Notes() {
   const [details, setDetails] = useState<INote>();

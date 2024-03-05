@@ -1,15 +1,23 @@
-/** Vendor */
-import App from "./App.tsx";
-import { Provider } from "react-redux";
+/** Vendors */
 import React from "react";
-/** Custom */
-import "./index.css";
 import ReactDOM from "react-dom/client";
-import { Store } from "./app/Store.ts";
+import { Provider } from "react-redux";
+
+/** Redux */
+import store from "./redux/configureStore";
+
+/** Custom Components */
+import App from "./App";
+
+/** Custom */
+import "./dist/css/app.css";
+import "./dist/css/card.css";
+import "./dist/css/format.css";
+import "./dist/css/index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Provider store={Store}>
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>
