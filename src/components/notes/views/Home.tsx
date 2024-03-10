@@ -1,15 +1,23 @@
-import React from "react";
+// import React from "react";
 
 /** Vendors */
+import type { TabsProps } from "antd";
 import { CiCirclePlus } from "react-icons/ci";
 import { Button, Flex, Tabs } from "antd";
+
+/** Redux */
+import { createNoteAction } from "@redux/actions/note";
 
 /** Custom Hooks */
 import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
 
 /** Types */
+import All from "../cards/All";
+import Business from "../cards/Business";
+import { INote } from "../../../types/note";
 import type { IRootState } from "@redux/configureStore";
-import type { TabsProps } from "antd";
+import Professional from "../cards/Professional";
+import Projects from "../cards/Projects";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -26,6 +34,9 @@ function Home() {
         resource_name: `note-${new Date().getTime()}`,
         text: "Content for the new note",
         title: "New Note",
+        id: 0,
+        html: "",
+        category: "",
       };
       dispatch(createNoteAction(note));
     },
@@ -35,28 +46,22 @@ function Home() {
     {
       key: "home-note-tab-0",
       label: "All",
-      children: (
-        <div>
-          {notes.map((note: INote) => (
-            <div>{note.title}</div>
-          ))}
-        </div>
-      ),
+      children: <All />,
     },
     {
       key: "home-note-tab-1",
       label: "Projects",
-      children: <div>2</div>,
+      children: <Projects />,
     },
     {
       key: "home-note-tab-2",
       label: "Business",
-      children: <div>3</div>,
+      children: <Business />,
     },
     {
       key: "home-note-tab-3",
       label: "Professional",
-      children: <div>4</div>,
+      children: <Professional />,
     },
   ];
 
