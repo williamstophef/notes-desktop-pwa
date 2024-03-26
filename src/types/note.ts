@@ -1,5 +1,7 @@
+import { NoteCategory } from "./enums";
+
 export interface INote {
-  category: string;
+  category: NoteCategory;
   id: number;
   html: string;
   resource_id: "note" | string;

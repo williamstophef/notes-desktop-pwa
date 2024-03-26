@@ -11,13 +11,15 @@ import { createNoteAction } from "@redux/actions/note";
 /** Custom Hooks */
 import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
 
-/** Types */
+/** Custom */
 import All from "../cards/All";
 import Business from "../cards/Business";
-import { INote } from "../../../types/note";
-import type { IRootState } from "@redux/configureStore";
 import Professional from "../cards/Professional";
 import Projects from "../cards/Projects";
+
+/** Types */
+import { INote, NoteCategory } from "../../../types";
+import type { IRootState } from "@redux/configureStore";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -36,7 +38,7 @@ function Home() {
         title: "New Note",
         id: 0,
         html: "",
-        category: "",
+        category: NoteCategory.Business,
       };
       dispatch(createNoteAction(note));
     },

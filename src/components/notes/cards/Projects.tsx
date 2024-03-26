@@ -6,28 +6,27 @@ import { IRootState } from "@redux/configureStore"; // Path might need adjustmen
 import { useSelector } from "react-redux";
 
 /** Custom */
-import Note from "./Note"; // Assuming this is your component for rendering individual notes
-import { INote } from "../../../types/note";
+import { INote } from "../../../types";
+import Note from "./Note";
+import { NoteCategory } from "../../../types";
 
 function Projects() {
-  // Select notes from Redux store
+  const actions = {
+    onToggleModal: (note: INote): void => {
+      throw new Error("Function not implemented.");
+    },
+  };
+
   const notes = useSelector((state: IRootState) => state.note.list);
 
-  // Filter notes specifically for the 'Projects' category
-  const filteredNotes = notes.filter((note) => note.category === "Projects");
+  const filteredNotes = notes.filter(
+    (note: INote) => note.category === NoteCategory.Projects
+  );
 
   return (
-    <div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
       {filteredNotes.map((note) => (
-        <Note
-          key={note.id}
-          note={note}
-          actions={{
-            onToggleModal: function (_note: INote): void {
-              throw new Error("Function not implemented.");
-            },
-          }}
-        />
+        <Note key={note.id} note={note} actions={actions} />
       ))}
     </div>
   );
