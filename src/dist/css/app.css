@@ -1,16 +1,11 @@
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/** Antd Layout Overwrites because the theme doesn't seem to be working? */
+.ant-layout .ant-layout-sider .logo {
+  background-image: url(/logos/notes-logo-512-2.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 80px;
+  margin: 20px 0;
 }
 
 @keyframes logo-spin {

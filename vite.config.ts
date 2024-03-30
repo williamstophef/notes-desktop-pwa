@@ -19,7 +19,6 @@ export default defineConfig(({ mode }) => {
 
   const pwaOptions: Partial<VitePWAOptions> = {
     base: "/",
-    // includeAssets: ["favicon.svg"],
     devOptions: {
       enabled: env.MODE === "development",
       navigateFallback: "index.html",
@@ -28,8 +27,8 @@ export default defineConfig(({ mode }) => {
     includeAssets: [
       "/robots.txt",
       "/sitemap.xml",
-      "/logos/apple-touch-icon.png",
-      "/logos/favicon.ico",
+      "/logos/notes-logo-32.png",
+      "/logos/notes-logo-192.png",
       "/logos/notes-logo-512.png",
     ],
     injectRegister: "auto",
@@ -37,12 +36,23 @@ export default defineConfig(({ mode }) => {
       background_color: "#f0f8ff",
       description: "Notes App To Track Stuff",
       display: "standalone",
-      name: "Notes App",
+      name: env.REACT_APP_CLIENT_NAME,
       orientation: "portrait",
       icons: [
         {
-          src: "logos/tractic-logo-512.png",
+          purpose: "any maskable",
+          sizes: "512x512",
+          src: "logos/notes-logo-512.png",
+          type: "image/png",
+        },
+        {
           sizes: "192x192",
+          src: "logos/notes-logo-192.png",
+          type: "image/png",
+        },
+        {
+          sizes: "32x32",
+          src: "logos/notes-logo-32.png",
           type: "image/png",
         },
       ],
@@ -50,15 +60,17 @@ export default defineConfig(({ mode }) => {
       theme_color: "#f0f8ff",
     },
     mode: env.MODE,
+    workbox: {
+      globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+    },
   };
 
   if (prod) {
     pwaOptions.srcDir = "src";
     pwaOptions.filename = claims ? "claims-sw.ts" : "prompt-sw.ts";
     pwaOptions.strategies = "injectManifest";
-    (pwaOptions.manifest as Partial<ManifestOptions>).name =
-      "Gilman Construction Media";
-    (pwaOptions.manifest as Partial<ManifestOptions>).short_name = "GCM";
+    (pwaOptions.manifest as Partial<ManifestOptions>).name = "Notes App";
+    (pwaOptions.manifest as Partial<ManifestOptions>).short_name = "Notes";
   }
 
   /** Auto Update SW and Skip Waiting */
@@ -87,16 +99,6 @@ export default defineConfig(({ mode }) => {
   /** Whether to uninstall the PWA or not */
   if (selfDestroying) pwaOptions.selfDestroying = selfDestroying;
 
-  /** Remove non-react-app envs */
-  const devenv = {};
-  for (const key in env) {
-    if (!key?.includes("REACT_APP_")) {
-      delete env[key];
-    } else {
-      devenv[`import.meta.env.VITE_${key}`] = JSON.stringify(env[key]);
-    }
-  }
-
   return {
     build: {
       sourcemap: process.env.SOURCE_MAP === "true",
@@ -110,7 +112,6 @@ export default defineConfig(({ mode }) => {
         "@components": path.resolve(__dirname) + "/src/components",
         "@dist": path.resolve(__dirname) + "/src/dist",
         "@hooks": path.resolve(__dirname) + "/src/hooks",
-        "@card": path.resolve(__dirname) + "/src/components/shared/card",
         "@redux": path.resolve(__dirname) + "/src/redux",
         types: path.resolve(__dirname) + "/src/types",
       },

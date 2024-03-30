@@ -1,49 +1,40 @@
-//  Vendors
+/** Vendors */
 import { FaRegBell } from "react-icons/fa";
 import { UserAddOutlined } from "@ant-design/icons";
-import { PiMagnifyingGlassBold } from "react-icons/pi";
-import { Button, Col, Input, Layout, Menu, Row } from "antd";
+import { Badge, Button, Col, Dropdown, Flex, Input, Layout, Row } from "antd";
 
 function Navbar() {
+  const items = [
+    {
+      key: "1",
+      label: "Test Notification",
+    },
+  ];
+
   return (
-    <Layout.Header
-      style={{
-        width: "100%",
-      }}
-    >
+    <Layout.Header>
       <Row align="middle" gutter={[12, 12]} justify="space-between">
-        <Col lg={8} md={10} sm={12} xs={24}>
-          <Input
-            placeholder="Search"
-            prefix={<PiMagnifyingGlassBold />}
-            size="large"
-          />
+        <Col lg={6} md={8} sm={10} xs={0}>
+          <Input placeholder="Search" size="large" />
         </Col>
         <Col flex={1} />
-        <Col
-          lg={8}
-          md={10}
-          sm={12}
-          xs={24}
-          style={{ alignItems: "center", display: "flex", left: "275px" }}
-        >
-          <Button icon={<UserAddOutlined />} size="large" type="text">
-            Hello, Chris
-          </Button>
-          <Menu
-            items={[
-              {
-                children: [
-                  { key: "menu-option-0", label: "Test Notification" },
-                ],
-                key: "4",
-                icon: <FaRegBell />,
-                label: "test",
-              },
-            ]}
-            mode="horizontal"
-            style={{ backgroundColor: "inherit" }}
-          />
+        <Col lg={10} md={12} sm={10} xs={24}>
+          <Flex align="center" flex="100px 1" gap={24} justify="flex-end">
+            <Dropdown
+              className="mt-auto"
+              menu={{ items }}
+              placement="bottomRight"
+            >
+              <Badge count={3} offset={[-4, 5]}>
+                <Button type="text">
+                  <FaRegBell style={{ fontSize: "1.4rem" }} />
+                </Button>
+              </Badge>
+            </Dropdown>
+            <Button icon={<UserAddOutlined />} size="large" type="text">
+              Hello, Chris
+            </Button>
+          </Flex>
         </Col>
       </Row>
     </Layout.Header>

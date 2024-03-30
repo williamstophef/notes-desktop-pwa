@@ -1,11 +1,21 @@
-import { NoteCategory } from "./enums";
+/** Types */
+import type { IBasicRecord } from "./common";
 
-export interface INote {
-  category: NoteCategory;
-  id: number;
+export interface ICategory extends IBasicRecord {
+  name: string;
+}
+
+export interface INote extends IBasicRecord {
+  category?: ICategory["resource_name"];
   html: string;
-  resource_id: "note" | string;
-  resource_name: string;
   title: string;
+  text: string;
+}
+
+export interface ISearchCategories {
+  text: string;
+}
+
+export interface ISearchNotes {
   text: string;
 }
