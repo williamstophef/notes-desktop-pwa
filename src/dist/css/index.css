@@ -6,6 +6,12 @@
   width: 100vw;
 }
 
+.ant-app,
+.ant-app > .ant-layout {
+  height: inherit;
+  width: inherit;
+}
+
 body {
   margin: 0;
 }

@@ -1,7 +1,8 @@
-/** Vendors */
 import React from "react";
-import ReactDOM from "react-dom/client";
+
+/** Vendors */
 import { Provider } from "react-redux";
+import ReactDOM from "react-dom/client";
 
 /** Redux */
 import store from "./redux/configureStore";
@@ -12,10 +13,13 @@ import App from "./App";
 /** Custom */
 import "./dist/css/app.css";
 import "./dist/css/card.css";
+import "./dist/css/color.css";
 import "./dist/css/format.css";
 import "./dist/css/index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root");
+
+ReactDOM.createRoot(root!).render(
   <React.StrictMode>
     <Provider store={store}>
       <App />

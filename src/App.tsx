@@ -1,33 +1,18 @@
 import React from "react";
 
 /** Vendors */
-import { ConfigProvider } from "antd";
+import { App } from "antd";
 import { RouterProvider } from "react-router-dom";
 
 /** Router */
 import routes from "./router";
 
-const App: React.FC = () => {
-  const theme = {
-    components: {
-      Layout: {
-        siderBg: "#3333ff",
-        headerBg: "#ffffff",
-        bodyBg: "#f2f2f2",
-      },
-      Modal: {
-        contentBg: "#ffffff",
-      },
-    },
-    // 1. Use light algorithm
-    token: {},
-  };
-
+function MainApp() {
   return (
-    <ConfigProvider theme={theme}>
+    <App>
       <RouterProvider router={routes} />
-    </ConfigProvider>
+    </App>
   );
-};
+}
 
-export default App;
+export default MainApp;
